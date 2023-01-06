@@ -1,7 +1,7 @@
 export default function () {
 	return (
 		<main className="intro">
-			<div>
+			<div className="grid">
 				<h1>Quizzical</h1>
 				<p>
 					Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo

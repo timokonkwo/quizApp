@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Karla:wght@400;600;700&display=swap');
 
 :root {
   --first-color: #4D5B9E;
@@ -11,12 +11,16 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Karla', sans-serif;
 }
 
 body {
   background: url("./assets/blob-1.png") no-repeat fixed bottom left, url("./assets/blob-2.png") fixed  no-repeat top right ;
   background-color: #F5F7FB;
+  font-family: 'Karla', sans-serif;
+}
+
+.grid {
+  display: grid;
 }
 
 button {
@@ -31,7 +35,6 @@ button {
 }
 
 .intro {
-  
   position: absolute;
   left: 50%;
   top: 50%;
@@ -39,7 +42,6 @@ button {
 }
 
 .intro > div {
-  display: grid;
   justify-content: center;
   align-items: center;
   gap: 1rem;
@@ -48,6 +50,7 @@ button {
 
 h1 {
   color: var(--first-color-dark);
+
 }
 
 .start__quiz {
@@ -57,21 +60,26 @@ h1 {
 }
 
 .quiz {
-  padding: 1rem 2.5rem
+  padding: 4rem 7rem;
+  gap: 1rem;
+  
 }
 
 .question {
-  display: grid;
   gap: 1rem;
+  color: var(--first-color-dark);
 }
-
 .options {
   display: flex;
+  gap: 1rem;
+  font-family: 'inter', sans-serif;
+  margin-bottom: .5rem;
 }
 
 .option {
-  padding: 2px 3px;
+  padding: .2rem 1.6rem;
   border: 1px solid var(--first-color);
+  border-radius: .5rem;
+  cursor: pointer;
 }
-
 
