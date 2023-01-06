@@ -81,5 +81,19 @@ h1 {
   border: 1px solid var(--first-color);
   border-radius: .5rem;
   cursor: pointer;
+  font-weight: 600;
+}
+
+.correct, .wrong {
+  outline: none;
+  border: none;
+}
+
+.correct {
+  background-color: var(--correct-color);
+}
+
+.wrong {
+  background-color: var(--wrong-color);
 }
 
