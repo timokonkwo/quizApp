@@ -55,3 +55,23 @@ h1 {
   font-size: 1rem;
   margin-top: 1rem;
 }
+
+.quiz {
+  padding: 1rem 2.5rem
+}
+
+.question {
+  display: grid;
+  gap: 1rem;
+}
+
+.options {
+  display: flex;
+}
+
+.option {
+  padding: 2px 3px;
+  border: 1px solid var(--first-color);
+}
+
+
