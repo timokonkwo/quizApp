@@ -1,3 +1,10 @@
+import { useState } from "react"
+import "./App.css"
+import Intro from "./components/Intro"
+
 export default function App(){
-  return <h1>hello</h1>
+  const [page, setPage] = useState("intro")
+  return (
+    <Intro />
+  )
 }
