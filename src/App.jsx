@@ -6,11 +6,8 @@ import Quiz from "./components/Quiz"
 
 export default function App(){
   const [page, setPage] = useState("intro")
-  return (
-    <main>
+  return <main>
     {/* <Intro /> */}
     <Quiz />
     </main>
-    
-  )
 }
