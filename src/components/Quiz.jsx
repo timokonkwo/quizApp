@@ -5,6 +5,10 @@ export default function Quiz() {
 		<div className="quiz grid">
 			<Question />
             <Question />
+			<Question />
+			<Question />
+			<Question />
+			<Question />
 		</div>
 	);
 }
