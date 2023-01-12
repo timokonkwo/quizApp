@@ -86,6 +86,7 @@ hr {
 }
 .options {
   display: flex;
+  justify-content: space-between;
   gap: 1rem;
   font-family: 'inter', sans-serif;
   margin-bottom: .5rem;
@@ -98,6 +99,7 @@ hr {
   cursor: pointer;
   font-weight: 600;
   display: inline-flex;
+  
   align-items: center;
 }
 
@@ -119,7 +121,14 @@ hr {
     display: grid;
     grid-template-columns: repeat(2, max-content);
     place-content: center;
+    justify-content: space-between;
   }
+
+  .question {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
 }
 
 @media screen and (max-width: 991px){
@@ -128,8 +137,8 @@ hr {
     grid-template-columns: max-content;
   }
 
-  .question {
-    width: 80%;
-    margin: 0 auto;
+
+  .options {
+
   }
 }
