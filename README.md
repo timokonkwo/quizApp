@@ -1,2 +1,2 @@
 # quizApp
-A quiz App made with react. Generates quizzes and grades you.
+A simple quiz App made with react. Generates quizzes and grades you.
