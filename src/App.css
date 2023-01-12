@@ -4,6 +4,7 @@
   --first-color: #4D5B9E;
   --first-color-dark: #293264;
   --wrong-color: #F8BCBC;
+  --selected-color: #D6DBF5;
   --correct-color: #94D7A2;
 }
 
@@ -31,7 +32,6 @@ button {
   border: none;
   padding: .9rem 2rem;
   border-radius: .75rem;
-  /* font-weight: bold; */
 }
 
 .intro {
@@ -72,9 +72,6 @@ main {
   
 }
 
-hr {
-  display: block;
-}
 .question {
   gap: 1.5rem;
   color: var(--first-color-dark);
@@ -116,6 +113,10 @@ hr {
   background-color: var(--wrong-color);
 }
 
+.selected {
+  background-color: var(--selected-color);
+}
+
 @media screen and (max-width: 767px){
   .options {
     display: grid;
@@ -136,10 +137,5 @@ hr {
   .quiz {
     place-content: center;
     grid-template-columns: max-content;
-  }
-
-
-  .options {
-
   }
 }

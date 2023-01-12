@@ -1,6 +1,7 @@
 export default function Question() {
+    
 	function Option(props) {
-		return <div className="option">{props.option}</div>;
+		return <div className="option" onClick={props.onClick}>{props.option}</div>;
 	}
 
 	return (
