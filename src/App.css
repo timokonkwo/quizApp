@@ -125,7 +125,8 @@ hr {
   }
 
   .question {
-    max-width: 100%;
+    width: 80%;
+    padding: 0 3rem;
     margin: 0 auto;
   }
 
