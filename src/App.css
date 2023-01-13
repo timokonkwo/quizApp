@@ -139,8 +139,7 @@ main {
 @media screen and (max-width: 767px){
   .options {
     display: grid;
-    grid-template-columns: repeat(2, fit-content);
-    place-content: center;
+    justify-content: space-around;
   }
 
   .option {
@@ -150,8 +149,8 @@ main {
   }
 
   .question {
-    width: 100%;
-    padding: 0 3rem;
+    max-width: 100%;
+    padding: 0 1rem;
     text-align: center;
   }
 

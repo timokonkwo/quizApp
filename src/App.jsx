@@ -13,7 +13,7 @@ export default function App() {
 
 
 	useEffect(() => {
-		fetch("https://opentdb.com/api.php?amount=6&category=18&type=multiple")
+		fetch("https://opentdb.com/api.php?amount=10&type=multiple")
 			.then((response) => response.json())
 			.then((data) => setQuiz(data.results))
 			.catch((err) => console.log("error"));
