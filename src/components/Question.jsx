@@ -12,7 +12,7 @@ export default function Question(props) {
 	return (
 		<div className="question grid">
 			<div>
-				<h3>How would one say goodbye in Spanish?</h3>
+				<h3>{props.question}</h3>
 
 				<div className="options">
 					{answers}
