@@ -82,6 +82,15 @@ main {
   
 }
 
+.error {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  line-height: 2rem;
+}
+
 .question {
   gap: 1.5rem;
   color: var(--first-color-dark);

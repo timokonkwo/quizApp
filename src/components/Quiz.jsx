@@ -4,11 +4,13 @@ import Question from "./Question";
 import Loader from "../../utils/Loader";
 
 export default function Quiz(props) {
+	const [count, setCount] = useState(1);
 
-	function reload(){
+	function reload() {
 		setTimeout(() => {
 			props.setLoading(!props.loading);
-		}, 3000)
+			setCount((prev) => prev + 1);
+		}, 3000);
 	}
 
 	// try {
@@ -26,11 +28,22 @@ export default function Quiz(props) {
 
 	return (
 		<div className="quiz grid">
-			{questions ? <>{questions}</> : <> 
-			<Loader />
-			{reload()}
-			</>}
-			<button>Check answers</button>
+			{questions ? (
+				<>
+					{questions}
+					<button>Check answers</button>
+				</>
+			) : count >= 3 ? (
+				<div className="error">
+					<h3>Network Error</h3>
+					<p>check your internet</p>
+				</div>
+			) : (
+				<>
+					<Loader />
+					{reload()}
+				</>
+			)}
 		</div>
 	);
 }
