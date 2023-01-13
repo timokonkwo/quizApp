@@ -6,9 +6,8 @@ export default function Question(props) {
 
     const options = [props.correct_answer, ...props.incorrect_answers];
 
-    const answers = options.map(option => <Option option={option}/>)
+    const answers = options.map(option => <Option key={option} option={option}/>)
 
-    console.log(props)
 
 	return (
 		<div className="question grid">
