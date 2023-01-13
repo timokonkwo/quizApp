@@ -1,36 +1,32 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import Question from "./Question";
+import Loader from "../../utils/Loader";
 
 export default function Quiz() {
-
 	const [quiz, setQuiz] = useState("");
+	const [loading, setLoading] = useState(false)
 
-	async function fetchQuiz(){
-		const response = await fetch("https://opentdb.com/api.php?amount=5&category=18&type=multiple")
+	useEffect(() => {
+		fetch("https://opentdb.com/api.php?amount=5&category=18&type=multiple")
+			.then((response) => response.json())
+			.then((data) => setQuiz(data.results))
+			.catch(err => console.log("error"))
+	}, []);
 
-		const data = await response.json()
-		
-		return data
-
-	}
-
-	useEffect(() => async () => {
-		
-		const quiz = await fetchQuiz();
-		const {results} = quiz
-		setQuiz(results)
-	})
+	const questions = quiz ? quiz.map(question => {
+	<Question
+	question={question.question}
+	correct_answer={question.correct_answer}
+	incorrect_answers = {question.incorrect_answers}
+	/>
+}
+	) : console.log("not fetched")
 
 	return (
 		<div className="quiz grid">
-			<Question />
-            <Question />
-			<Question />
-			<Question />
-			<Question />
-			<Question />
-
+			{questions}
+			<Loader/>
 			<button>Check answers</button>
 		</div>
 	);

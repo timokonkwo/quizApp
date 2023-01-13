@@ -1,4 +1,4 @@
-export default function () {
+export default function (props) {
 	return (
 		<main className="intro">
 			<div className="grid">
@@ -8,7 +8,7 @@ export default function () {
 					quidem quos fugiat, eaque delectus.
 				</p>
 
-				<button className="start__quiz">Start quiz</button>
+				<button className="start__quiz" onClick={props.startQuiz}>Start quiz</button>
 			</div>
 		</main>
 	);

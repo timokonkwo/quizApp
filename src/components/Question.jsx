@@ -1,8 +1,14 @@
-export default function Question() {
+export default function Question(props) {
     
 	function Option(props) {
 		return <div className="option" onClick={props.onClick}>{props.option}</div>;
 	}
+
+    // const options = [props.correct_answer, ...props.incorrect_answers];
+
+    const answers = "HI" //options.map(option => <Option option={option}/>)
+
+    console.log(props)
 
 	return (
 		<div className="question grid">
@@ -10,10 +16,7 @@ export default function Question() {
 				<h3>How would one say goodbye in Spanish?</h3>
 
 				<div className="options">
-					<Option option="Adios" />
-					<Option option="Hola" />
-					<Option option="Au Revoir" />
-					<Option option="Salir" />
+					{answers}
 				</div>
 			</div>
 

@@ -59,6 +59,17 @@ main {
   margin: 0 auto;
 }
 
+.loader {
+  height: 100vh;
+  background-image: url("../src/assets/loader.gif");
+  background-repeat: no-repeat;
+  background-size: 200px;
+  background-position: center;
+  background-attachment: fixed;
+  z-index: 2;
+}
+
+
 .start__quiz {
   padding: .9rem 3rem;
   font-size: 1rem;
