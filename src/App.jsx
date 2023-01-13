@@ -9,13 +9,15 @@ import { useEffect } from "react";
 export default function App() {
 	const [page, setPage] = useState("intro");
 	const [quiz, setQuiz] = useState(null);
+	const [loading, setLoading] = useState(true);
+
 
 	useEffect(() => {
 		fetch("https://opentdb.com/api.php?amount=6&category=18&type=multiple")
 			.then((response) => response.json())
 			.then((data) => setQuiz(data.results))
 			.catch((err) => console.log("error"));
-	}, []);
+	}, [loading]);
 
 	function startQuiz() {
 		setPage("quiz");
@@ -26,7 +28,7 @@ export default function App() {
 			{page === "intro" ? (
 				<Intro startQuiz={startQuiz} />
 			) : (
-				<Quiz quiz={quiz} />
+				<Quiz quiz={quiz} loading={loading} setLoading={setLoading} />
 			)}
 		</main>
 	);

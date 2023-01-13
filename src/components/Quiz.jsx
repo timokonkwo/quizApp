@@ -2,13 +2,19 @@ import { useEffect } from "react";
 import { useState } from "react";
 import Question from "./Question";
 import Loader from "../../utils/Loader";
-// import {nanoid} from "nanoid"
 
 export default function Quiz(props) {
-	const [loading, setLoading] = useState(true);
 
-	try {
-		const questions = props.quiz.map((question) => (
+	function reload(){
+		setTimeout(() => {
+			props.setLoading(!props.loading);
+		}, 3000)
+	}
+
+	// try {
+	const questions =
+		props.quiz &&
+		props.quiz.map((question) => (
 			<Question
 				id={question.question}
 				key={question.question}
@@ -18,16 +24,13 @@ export default function Quiz(props) {
 			/>
 		));
 
-		return (
-			<div className="quiz grid">
-				{questions}
-				<button>Check answers</button>
-			</div>
-		);
-	} catch (err) {
-		console.log("Network issue");
-		return (
+	return (
+		<div className="quiz grid">
+			{questions ? <>{questions}</> : <> 
 			<Loader />
-		)
-	}
+			{reload()}
+			</>}
+			<button>Check answers</button>
+		</div>
+	);
 }
