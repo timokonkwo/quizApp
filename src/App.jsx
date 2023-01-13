@@ -8,21 +8,27 @@ import { useEffect } from "react";
 
 export default function App() {
 	const [page, setPage] = useState("intro");
+	const [quiz, setQuiz] = useState(null);
+
+  useEffect(() => {
+		fetch("https://opentdb.com/api.php?amount=6&category=18&type=multiple")
+			.then((response) => response.json())
+			.then((data) => setQuiz(data.results))
+			.catch((err) => console.log("error"));
+	}, []);
+
 
   function startQuiz(){
     setPage("quiz")
   }
 
-  // useEffect(() => {
-
-  // }, [page])
 
 	return (
 		<main>
 			{
         page === "intro" ?
           <Intro startQuiz={startQuiz}/>
-       : <Quiz/>
+       : <Quiz quiz={quiz}/>
       }
 		</main>
 	);

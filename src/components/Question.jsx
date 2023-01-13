@@ -4,9 +4,9 @@ export default function Question(props) {
 		return <div className="option" onClick={props.onClick}>{props.option}</div>;
 	}
 
-    // const options = [props.correct_answer, ...props.incorrect_answers];
+    const options = [props.correct_answer, ...props.incorrect_answers];
 
-    const answers = "HI" //options.map(option => <Option option={option}/>)
+    const answers = options.map(option => <Option option={option}/>)
 
     console.log(props)
 
