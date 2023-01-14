@@ -1,2 +1,2 @@
-# quizApp
-A simple quiz App made with react. Generates quizzes and grades you.
+# quizNow
+A simple quiz App made with react. it generates quizzes from an API and grades you as you take them
