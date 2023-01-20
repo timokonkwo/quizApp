@@ -1,4 +1,5 @@
-export default function (props) {
+import { Link } from "react-router-dom";
+export default function () {
 	return (
 		<main className="intro">
 			<div className="grid">
@@ -8,7 +9,9 @@ export default function (props) {
 					quidem quos fugiat, eaque delectus.
 				</p>
 
-				<button className="start__quiz" onClick={props.startQuiz}>Start quiz</button>
+				<Link to="/quiz">
+					<button className="start__quiz">Start quiz</button>
+				</Link>
 			</div>
 		</main>
 	);

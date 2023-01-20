@@ -1,49 +1,32 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { Link } from "react-router-dom";
+import { data } from "../data";
 import Question from "./Question";
-import Loader from "../../utils/Loader";
 
-export default function Quiz(props) {
-	const [count, setCount] = useState(1);
+export default function Quiz() {
+	/**
+	 * Implement back button
+	 * Render the quiz data to the page
+	 *
+	 */
 
-	function reload() {
-		setTimeout(() => {
-			props.setLoading(!props.loading);
-			setCount((prev) => prev + 1);
-		}, 3000);
-	}
-
-	// try {
-	const questions =
-		props.quiz &&
-		props.quiz.map((question) => (
+	// Map over the data and return Question Components
+	const questionItems = data.map((quizItem) => {
+		return (
 			<Question
-				id={question.question}
-				key={question.question}
-				question={question.question}
-				correct_answer={question.correct_answer}
-				incorrect_answers={question.incorrect_answers}
+				id={quizItem.question}
+				key={quizItem.question}
+				question={quizItem.question}
+				correctAnswer={quizItem.correct_answer}
+				wrongAnswers={quizItem.incorrect_answers}
 			/>
-		));
+		);
+	});
 
 	return (
 		<div className="quiz grid">
-			{questions ? (
-				<>
-					{questions}
-					<button>Check answers</button>
-				</>
-			) : count >= 3 ? (
-				<div className="error">
-					<h3>Network Error</h3>
-					<p>check your internet</p>
-				</div>
-			) : (
-				<>
-					<Loader />
-					{reload()}
-				</>
-			)}
+			<Link to="/">back</Link>
+			<h3>Quiz</h3>
+			{questionItems}
 		</div>
 	);
 }

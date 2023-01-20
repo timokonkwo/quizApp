@@ -1,13 +1,11 @@
 export default function Question(props) {
-    
-	function Option(props) {
-		return <div className="option" onClick={props.onClick}>{props.option}</div>;
-	}
 
-    const options = [props.correct_answer, ...props.incorrect_answers];
-
-    const answers = options.map(option => <Option key={option} option={option}/>)
-
+	/**
+	 * Randomize and render the options 
+	 * Implement a click event on each option click
+	 * Create a state to manage user selection
+	 * User can only select one option per question
+	 */
 
 	return (
 		<div className="question grid">
@@ -15,7 +13,6 @@ export default function Question(props) {
 				<h3>{props.question}</h3>
 
 				<div className="options">
-					{answers}
 				</div>
 			</div>
 
