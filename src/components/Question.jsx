@@ -22,15 +22,15 @@ export default function Question(props) {
 	 * Set a key prop to each option using the option answer as key
 	 *  */ 
 
-	const options = [props.correctAnswer, props.wrongAnswers]
-
-	const answers = shuffle(options)
-	console.log(answers)
-	const answersRender = [<Option key={props.correctAnswer} answer={props.correctAnswer} />, props.wrongAnswers.map(item => <Option key={item} answer={item}/>)]
+	const options = [props.correctAnswer, ...props.wrongAnswers]
 
 	// Shuffle the answers so the correct one won't always be the first.
-	const shuffledAnswers = shuffle(answers);
-	console.log(shuffledAnswers)
+	const answers = shuffle(options)
+	console.log(answers)
+
+	const answersRender = answers.map(item => <Option key={item} answer={item}/>)
+
+	// console.log(shuffledAnswers)
 
 	return (
 		<div className="question grid">
