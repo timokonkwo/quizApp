@@ -1,3 +1,5 @@
+import shuffle from "../../utils/shuffle";
+
 export default function Question(props) {
 
 	/**
@@ -7,12 +9,38 @@ export default function Question(props) {
 	 * User can only select one option per question
 	 */
 
+	function Option(props){
+		return (
+			<div className="option">
+				{props.answer}
+			</div>
+		)
+	}
+
+	/**
+	 * Combine the correct answer with the wrong ones into a single array
+	 * Set a key prop to each option using the option answer as key
+	 *  */ 
+
+	const options = [props.correctAnswer, props.wrongAnswers]
+
+	const answers = shuffle(options)
+	console.log(answers)
+	const answersRender = [<Option key={props.correctAnswer} answer={props.correctAnswer} />, props.wrongAnswers.map(item => <Option key={item} answer={item}/>)]
+
+	// Shuffle the answers so the correct one won't always be the first.
+	const shuffledAnswers = shuffle(answers);
+	console.log(shuffledAnswers)
+
 	return (
 		<div className="question grid">
 			<div>
 				<h3>{props.question}</h3>
 
 				<div className="options">
+					{
+						answersRender
+					}
 				</div>
 			</div>
 
