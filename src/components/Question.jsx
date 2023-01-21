@@ -26,11 +26,9 @@ export default function Question(props) {
 
 	// Shuffle the answers so the correct one won't always be the first.
 	const answers = shuffle(options)
-	console.log(answers)
 
+	// Map over the answers to render each item into the Option component
 	const answersRender = answers.map(item => <Option key={item} answer={item}/>)
-
-	// console.log(shuffledAnswers)
 
 	return (
 		<div className="question grid">
