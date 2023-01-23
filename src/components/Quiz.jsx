@@ -7,32 +7,43 @@ export default function Quiz() {
 	/**
 	 * Implement back button
 	 * Render the quiz data to the page
-	 * 
+	 *
 	 */
+
+	const handleSelection = (question, answer) => {
+		setQuiz((prevQuiz) =>
+			prevQuiz.map((item) => {
+				return item.question === question
+					? { ...item, selected: answer }
+					: item;
+			})
+		);
+	};
 
 	// Initialize state
 	const [quiz, setQuiz] = useState(data);
-	const [select, setSelect] = useState('');
 
 	const handleOptionClick = (event) => {
 		// Grab the particular question
-		const question = event.currentTarget.parentElement.parentElement.dataset.question;
+		const question =
+			event.currentTarget.parentElement.parentElement.dataset.question;
 
 		// Grab the particular answer if one of the options was clicked
-		const answer = event.target.classList.contains("option") ? event.target.innerText : null
+		const answer = event.target.classList.contains("option")
+			? event.target.innerText
+			: null;
 
-		setSelect(answer);
+		handleSelection(question, answer);
 
 		// Remove the selected marker from all the items in that options list and add it to only the current selected.
 
 		// Check the particular question and check for answer
-		const match = quiz.filter(item => item.question === question)
+		const match = quiz.filter((item) => item.question === question);
 		// console.log(match)
-	}
+	};
 
 	// Map over the data and return Question Components
-	const questionItems = data.map((quizItem) => {
-
+	const questionItems = quiz.map((quizItem) => {
 		return (
 			<Question
 				id={quizItem.question}
@@ -41,7 +52,7 @@ export default function Quiz() {
 				correctAnswer={quizItem.correct_answer}
 				wrongAnswers={quizItem.incorrect_answers}
 				handleOptionClick={handleOptionClick}
-				select={select}
+				selected={quizItem.selected}
 			/>
 		);
 	});

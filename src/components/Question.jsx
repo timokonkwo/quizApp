@@ -19,23 +19,14 @@ export default function Question(props) {
 
 	function Option(props){
 		return (
-			<div className={props.select && props.select === props.answer ? "option selected": "option"}>
+			<div className={props.selected && props.selected === props.answer ? "option selected": "option"}>
 				{props.answer}
 			</div>
 		)
 	}
 
-	/**
-	 * Combine the correct answer with the wrong ones into a single array
-	 * Set a key prop to each option using the option answer as key
-	 *  */ 
-
-	// Shuffle the answers so the correct one won't always be the first.
-
-	// const answers = shuffle(options)
-
 	// Map over the answers to render each item into the Option component
-	const answersRender = options && options.map(item => <Option key={item} answer={item} select={props.select}/>)
+	const answersRender = options && options.map(item => <Option key={item} answer={item} selected={props.selected}/>)
 
 	return (
 		<div data-question={props.question} className="question grid">
