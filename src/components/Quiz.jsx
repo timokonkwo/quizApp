@@ -62,6 +62,8 @@ export default function Quiz() {
 			<Link to="/">back</Link>
 			<h3>Quiz</h3>
 			{questionItems}
+
+			<button>Check answers</button>
 		</div>
 	);
 }
