@@ -22,20 +22,20 @@ export default function Question(props) {
 	 * Set a key prop to each option using the option answer as key
 	 *  */ 
 
-	const options = [props.correctAnswer, ...props.wrongAnswers]
-
 	// Shuffle the answers so the correct one won't always be the first.
-	const answers = shuffle(options)
+	const answers = shuffle([props.correctAnswer, ...props.wrongAnswers])
+
+	// const answers = shuffle(options)
 
 	// Map over the answers to render each item into the Option component
-	const answersRender = answers.map(item => <Option key={item} answer={item}/>)
+	const answersRender = answers.map(item => <Option key={item} answer={item} handleAnswer={props.handleAnswer}/>)
 
 	return (
-		<div className="question grid">
+		<div data-question={props.question} className="question grid">
 			<div>
 				<h3>{props.question}</h3>
 
-				<div className="options">
+				<div onClick={props.handleAnswer} className="options">
 					{
 						answersRender
 					}
