@@ -1,6 +1,9 @@
+import { useState } from "react";
+import { useEffect } from "react";
 import shuffle from "../../utils/shuffle";
 
 export default function Question(props) {
+	const [options, setOptions] = useState(null)
 
 	/**
 	 * Randomize and render the options 
@@ -9,9 +12,14 @@ export default function Question(props) {
 	 * User can only select one option per question
 	 */
 
+	useEffect(() => {
+		const answers = shuffle([props.correctAnswer, ...props.wrongAnswers])
+		setOptions(answers);
+	}, [])
+
 	function Option(props){
 		return (
-			<div className="option">
+			<div className={props.select && props.select === props.answer ? "option selected": "option"}>
 				{props.answer}
 			</div>
 		)
@@ -23,19 +31,18 @@ export default function Question(props) {
 	 *  */ 
 
 	// Shuffle the answers so the correct one won't always be the first.
-	const answers = shuffle([props.correctAnswer, ...props.wrongAnswers])
 
 	// const answers = shuffle(options)
 
 	// Map over the answers to render each item into the Option component
-	const answersRender = answers.map(item => <Option key={item} answer={item} handleAnswer={props.handleAnswer}/>)
+	const answersRender = options && options.map(item => <Option key={item} answer={item} select={props.select}/>)
 
 	return (
 		<div data-question={props.question} className="question grid">
 			<div>
 				<h3>{props.question}</h3>
 
-				<div onClick={props.handleAnswer} className="options">
+				<div onClick={props.handleOptionClick} className="options">
 					{
 						answersRender
 					}
