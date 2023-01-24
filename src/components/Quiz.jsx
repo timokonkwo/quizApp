@@ -10,6 +10,8 @@ export default function Quiz() {
 	 *
 	 */
 
+	const [endQuiz, setEndQuiz] = useState(false)
+
 	const handleSelection = (question, answer) => {
 		setQuiz((prevQuiz) =>
 			prevQuiz.map((item) => {
@@ -21,8 +23,9 @@ export default function Quiz() {
 	};
 
 	const handleResult = () => {
+		setEndQuiz(true)
 		setQuiz(questions => questions.map(questionItem => {
-			return questionItem.selected === questionItem.correct_answer ? {...questionItem, marked:true} : questionItem
+			return questionItem.selected === questionItem.correct_answer ? {...questionItem, marked:"correct"} : {...questionItem, marked:"wrong"}
 		}
 		))
 	}
@@ -57,6 +60,7 @@ export default function Quiz() {
 				handleOptionClick={handleOptionClick}
 				selected={quizItem.selected}
 				marked={quizItem.marked}
+				endQuiz={endQuiz}
 			/>
 		);
 	});
