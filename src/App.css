@@ -34,6 +34,10 @@ button {
   border-radius: .75rem;
 }
 
+button:hover {
+  background-color: var(--first-color-dark);
+}
+
 .intro {
   position: absolute;
   left: 50%;

@@ -8,6 +8,7 @@ export default function Question(props) {
 	 * Randomize and render the options
 	 * User can only select one option per question
 	 */
+
 	const [options, setOptions] = useState(null);
 
 	// Shuffle the options only once on first render
@@ -20,7 +21,7 @@ export default function Question(props) {
 	const answersRender =
 		options &&
 		options.map((item) => (
-			<Option key={item} answer={item} selected={props.selected} />
+			<Option key={item} answer={item} selected={props.selected} correctAnswer={props.correctAnswer} marked={props.marked} />
 		));
 
 	return (

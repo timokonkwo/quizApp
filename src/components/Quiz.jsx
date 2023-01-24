@@ -20,6 +20,13 @@ export default function Quiz() {
 		);
 	};
 
+	const handleResult = () => {
+		setQuiz(questions => questions.map(questionItem => {
+			return questionItem.selected === questionItem.correct_answer ? {...questionItem, marked:true} : questionItem
+		}
+		))
+	}
+
 	// Initialize state
 	const [quiz, setQuiz] = useState(data);
 
@@ -33,13 +40,9 @@ export default function Quiz() {
 			? event.target.innerText
 			: null;
 
+		// Handle user option
 		handleSelection(question, answer);
 
-		// Remove the selected marker from all the items in that options list and add it to only the current selected.
-
-		// Check the particular question and check for answer
-		const match = quiz.filter((item) => item.question === question);
-		// console.log(match)
 	};
 
 	// Map over the data and return Question Components
@@ -53,6 +56,7 @@ export default function Quiz() {
 				wrongAnswers={quizItem.incorrect_answers}
 				handleOptionClick={handleOptionClick}
 				selected={quizItem.selected}
+				marked={quizItem.marked}
 			/>
 		);
 	});
@@ -63,7 +67,7 @@ export default function Quiz() {
 			<h3>Quiz</h3>
 			{questionItems}
 
-			<button>Check answers</button>
+			<button onClick={handleResult}>Check answers</button>
 		</div>
 	);
 }
