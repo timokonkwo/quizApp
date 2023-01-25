@@ -10,7 +10,14 @@ export default function Quiz() {
 	 *
 	 */
 
-	const [endQuiz, setEndQuiz] = useState(false)
+	 const handleResult = () => {
+		setEndQuiz(true);
+		setQuiz(questions => questions.map(questionItem => {
+			return questionItem.selected === questionItem.correct_answer ? {...questionItem, marked:"correct"} : {...questionItem, marked:"wrong"}
+		}
+		))
+	}
+
 
 	const handleSelection = (question, answer) => {
 		setQuiz((prevQuiz) =>
@@ -22,18 +29,12 @@ export default function Quiz() {
 		);
 	};
 
-	const handleResult = () => {
-		setEndQuiz(true)
-		setQuiz(questions => questions.map(questionItem => {
-			return questionItem.selected === questionItem.correct_answer ? {...questionItem, marked:"correct"} : {...questionItem, marked:"wrong"}
-		}
-		))
-	}
-
-	// Initialize state
-	const [quiz, setQuiz] = useState(data);
-
 	const handleOptionClick = (event) => {
+
+		if (endQuiz) {
+			return
+		}
+
 		// Grab the particular question
 		const question =
 			event.currentTarget.parentElement.parentElement.dataset.question;
@@ -47,6 +48,12 @@ export default function Quiz() {
 		handleSelection(question, answer);
 
 	};
+
+	// Initialize quiz state
+	const [quiz, setQuiz] = useState(data);
+
+	// Initialialize end quiz state
+	const [endQuiz, setEndQuiz] = useState(false)
 
 	// Map over the data and return Question Components
 	const questionItems = quiz.map((quizItem) => {

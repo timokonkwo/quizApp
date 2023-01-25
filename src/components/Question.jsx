@@ -21,7 +21,14 @@ export default function Question(props) {
 	const answersRender =
 		options &&
 		options.map((item) => (
-			<Option key={item} answer={item} selected={props.selected} correctAnswer={props.correctAnswer} marked={props.marked} ended={props.endQuiz}/>
+			<Option 
+				key={item} 
+				answer={item} 
+				selected={props.selected} 
+				correctAnswer={props.correctAnswer} 
+				marked={props.marked}
+				endQuiz={props.endQuiz}
+			/>
 		));
 
 	return (
@@ -29,7 +36,7 @@ export default function Question(props) {
 			<div>
 				<h3>{props.question}</h3>
 
-				<div onClick={props.endQuiz ? console.log("ended") : props.handleOptionClick} className="options">
+				<div onClick={props.handleOptionClick} className="options">
 					{answersRender}
 				</div>
 			</div>
