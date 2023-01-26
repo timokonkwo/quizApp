@@ -13,7 +13,6 @@ export default function Quiz() {
 
 	const increaseScore = () => {
 		setScore((formerScore) => formerScore + 1);
-		console.log(score)
 	};
 
 	const handleButtonClick = () => {
