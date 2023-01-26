@@ -8,14 +8,14 @@ export default function Quiz() {
 	 * Implement back button
 	 * Render the quiz data to the page
 	 * Implement score state
-	 * Implement reset button
+	 * Implement play again button
 	 */
 
 	const increaseScore = () => {
 		setScore((formerScore) => formerScore + 1);
 	};
 
-	const handleResult = () => {
+	const handleButtonClick = () => {
 		setEndQuiz(true);
 		setQuiz((questions) =>
 			questions.map((questionItem) => {
@@ -89,7 +89,14 @@ export default function Quiz() {
 			<h3>Quiz</h3>
 			{questionItems}
 
-			<button onClick={handleResult}>Check answers</button>
+			<div className="grid answer__region">
+				{endQuiz && <h1>Your score is {score}/{quiz.length}</h1>}
+				<button onClick={handleButtonClick}>
+				{endQuiz ? "Play again" : "Check answers"}
+			</button>
+			</div>
+
+			
 		</div>
 	);
 }
