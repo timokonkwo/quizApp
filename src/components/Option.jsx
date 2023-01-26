@@ -19,6 +19,10 @@ export default function Option(props) {
             cssClass = "option wrong"
         }
 
+        else {
+            cssClass="option marked"
+        }
+
     }
 
     else if (targetOptionElement){
