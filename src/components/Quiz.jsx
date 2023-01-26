@@ -16,6 +16,12 @@ export default function Quiz() {
 	};
 
 	const handleButtonClick = () => {
+		if (endQuiz){
+			setScore(0)
+			setEndQuiz(false)
+			setQuiz(data)
+			return
+		}
 		setEndQuiz(true);
 		setQuiz((questions) =>
 			questions.map((questionItem) => {
@@ -90,6 +96,8 @@ export default function Quiz() {
 			{questionItems}
 
 			<div className="grid answer__region">
+
+				{/* Render quiz results */}
 				{endQuiz && <h1>Your score is {score}/{quiz.length}</h1>}
 				<button onClick={handleButtonClick}>
 				{endQuiz ? "Play again" : "Check answers"}
