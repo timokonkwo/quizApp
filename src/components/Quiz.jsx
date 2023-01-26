@@ -13,14 +13,15 @@ export default function Quiz() {
 
 	const increaseScore = () => {
 		setScore((formerScore) => formerScore + 1);
+		console.log(score)
 	};
 
 	const handleButtonClick = () => {
-		if (endQuiz){
-			setScore(0)
-			setEndQuiz(false)
-			setQuiz(data)
-			return
+		if (endQuiz) {
+			setScore(0);
+			setEndQuiz(false);
+			setQuiz(data);
+			return;
 		}
 		setEndQuiz(true);
 		setQuiz((questions) =>
@@ -94,17 +95,17 @@ export default function Quiz() {
 			<Link to="/">back</Link>
 			<h3>Quiz</h3>
 			{questionItems}
-
 			<div className="grid answer__region">
-
 				{/* Render quiz results */}
-				{endQuiz && <h1>Your score is {score}/{quiz.length}</h1>}
+				{endQuiz && (
+					<h1>
+						Your score is {score}/{quiz.length}
+					</h1>
+				)}
 				<button onClick={handleButtonClick}>
-				{endQuiz ? "Play again" : "Check answers"}
-			</button>
+					{endQuiz ? "Play again" : "Check answers"}
+				</button>
 			</div>
-
-			
 		</div>
 	);
 }
