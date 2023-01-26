@@ -141,6 +141,12 @@ main {
   background-color: var(--selected-color);
 }
 
+.answer__region {
+  grid-template-columns: max-content max-content;
+  place-content: center;
+  gap: 2.5rem;
+}
+
 @media screen and (max-width: 767px){
   .options {
     display: grid;
@@ -158,6 +164,13 @@ main {
     padding: 0 1rem;
     text-align: center;
   }
+
+  .answer__region {
+    grid-template-columns: max-content;
+    row-gap: 1rem;
+    place-content: center;
+  }
+  
 
 }
 

@@ -7,17 +7,33 @@ export default function Quiz() {
 	/**
 	 * Implement back button
 	 * Render the quiz data to the page
-	 *
+	 * Implement score state
+	 * Implement play again button
 	 */
 
-	 const handleResult = () => {
-		setEndQuiz(true);
-		setQuiz(questions => questions.map(questionItem => {
-			return questionItem.selected === questionItem.correct_answer ? {...questionItem, marked:"correct"} : {...questionItem, marked:"wrong"}
-		}
-		))
-	}
+	const increaseScore = () => {
+		setScore((formerScore) => formerScore + 1);
+	};
 
+	const handleButtonClick = () => {
+		if (endQuiz) {
+			setScore(0);
+			setEndQuiz(false);
+			setQuiz(data);
+			return;
+		}
+		setEndQuiz(true);
+		setQuiz((questions) =>
+			questions.map((questionItem) => {
+				if (questionItem.selected === questionItem.correct_answer) {
+					increaseScore();
+					return { ...questionItem, marked: "correct" };
+				} else {
+					return { ...questionItem, marked: "wrong" };
+				}
+			})
+		);
+	};
 
 	const handleSelection = (question, answer) => {
 		setQuiz((prevQuiz) =>
@@ -30,9 +46,8 @@ export default function Quiz() {
 	};
 
 	const handleOptionClick = (event) => {
-
 		if (endQuiz) {
-			return
+			return;
 		}
 
 		// Grab the particular question
@@ -46,14 +61,16 @@ export default function Quiz() {
 
 		// Handle user option
 		handleSelection(question, answer);
-
 	};
 
 	// Initialize quiz state
 	const [quiz, setQuiz] = useState(data);
 
 	// Initialialize end quiz state
-	const [endQuiz, setEndQuiz] = useState(false)
+	const [endQuiz, setEndQuiz] = useState(false);
+
+	// Initialize score state
+	const [score, setScore] = useState(0);
 
 	// Map over the data and return Question Components
 	const questionItems = quiz.map((quizItem) => {
@@ -77,8 +94,17 @@ export default function Quiz() {
 			<Link to="/">back</Link>
 			<h3>Quiz</h3>
 			{questionItems}
-
-			<button onClick={handleResult}>Check answers</button>
+			<div className="grid answer__region">
+				{/* Render quiz results */}
+				{endQuiz && (
+					<h1>
+						Your score is {score}/{quiz.length}
+					</h1>
+				)}
+				<button onClick={handleButtonClick}>
+					{endQuiz ? "Play again" : "Check answers"}
+				</button>
+			</div>
 		</div>
 	);
 }
