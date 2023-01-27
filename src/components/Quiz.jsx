@@ -23,19 +23,20 @@ export default function Quiz() {
 	const [score, setScore] = useState(0);
 
 	// Initialize loading
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(true); //default to true
 
-	const [refreshQuiz, setRefreshQuiz] = useState(false)
+	const [refreshQuiz, setRefreshQuiz] = useState(false);
 
 	useEffect(
 		() => async () => {
 			const response = await fetch(
 				"https://opentdb.com/api.php?amount=10"
 			);
-			const data = await response.json();
+			const data = await response.json().catch((err) => console.log(err));
+
 			const quiz = await data.results;
 			setQuiz(quiz);
-			setLoading(false)
+			setLoading(false);
 		},
 		[refreshQuiz]
 	);
@@ -50,7 +51,7 @@ export default function Quiz() {
 		if (endQuiz) {
 			setScore(0);
 			setEndQuiz(false);
-			setLoading(true)
+			setLoading(true);
 			setRefreshQuiz(true);
 			return;
 		}
@@ -114,24 +115,30 @@ export default function Quiz() {
 
 	return (
 		<div className="quiz grid">
-
 			{/* Render the loader if in loading state else render the components */}
-			{loading ?  <Loader /> : <>
-				<Link to="/">back</Link>
-				<h3>Quiz</h3>
-				{questionItems}
-				<div className="grid answer__region">
-					{/* Render quiz results */}
-					{endQuiz && (
-						<h1>
-							Your score is {score}/{quiz.length}
-						</h1>
-					)}
-					<button onClick={handleButtonClick}>
-						{endQuiz ? "Play again" : "Check answers"}
-					</button>
-				</div>
-			</>}
+			{loading ? (
+				<Loader />
+			) : (
+				<>
+					<h3>Quiz</h3>
+					{questionItems}
+					<div className="grid answer__region">
+						{/* Render quiz results */}
+						{endQuiz && (
+							<h1>
+								Your score is {score}/{quiz.length}
+							</h1>
+						)}
+						<button onClick={handleButtonClick}>
+							{endQuiz ? "Play again" : "Check answers"}
+						</button>
+
+							<Link className="back__btn" to="/">
+								back
+							</Link>
+					</div>
+				</>
+			)}
 		</div>
 	);
 }
