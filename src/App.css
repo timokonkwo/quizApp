@@ -65,11 +65,16 @@ main {
 
 .loader {
 	height: 100vh;
+  width: 100%;
 	background-image: url("../src/assets/loader.gif");
 	background-repeat: no-repeat;
 	background-size: 200px;
 	background-position: center;
 	background-attachment: fixed;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .start__quiz {
@@ -129,7 +134,7 @@ main {
 
 .marked {
 	font-weight: normal;
-  border-color: #D6DBF5;
+	border-color: #D6DBF5;
 }
 
 .correct {
@@ -145,9 +150,24 @@ main {
 }
 
 .answer__region {
-	grid-template-columns: max-content max-content;
+	grid-template-columns: max-content max-content max-content;
 	place-content: center;
+  align-items: center;
 	gap: 2.5rem;
+}
+
+/* .back__btn__wrapper {
+  justify-self: center;
+} */
+
+.back__btn {
+  display: inline-flex;
+  text-decoration: none;
+  border: 1px solid var(--first-color);
+  border-radius: .75rem;
+  padding: .4rem 1rem;
+  text-align: center;
+  justify-self: center;
 }
 
 @media screen and (max-width: 767px) {
@@ -174,6 +194,7 @@ main {
 		place-content: center;
 	}
 }
+
 
 @media screen and (min-width: 991px) {
 	.quiz {

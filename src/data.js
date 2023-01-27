@@ -1,4 +1,4 @@
-export const data = [
+export const localData = [
     {
         category: "Entertainment: Film",
         type: "multiple",

@@ -1,7 +1,9 @@
+import { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { data } from "../data";
+import { localData } from "../data";
 import Question from "./Question";
+import Loader from "../../utils/Loader";
 
 export default function Quiz() {
 	/**
@@ -11,15 +13,46 @@ export default function Quiz() {
 	 * Implement play again button
 	 */
 
+	// Initialize quiz state
+	const [quiz, setQuiz] = useState(localData);
+
+	// Initialialize end quiz state
+	const [endQuiz, setEndQuiz] = useState(false);
+
+	// Initialize score state
+	const [score, setScore] = useState(0);
+
+	// Initialize loading
+	const [loading, setLoading] = useState(true); //default to true
+
+	const [refreshQuiz, setRefreshQuiz] = useState(false);
+
+	useEffect(
+		() => async () => {
+			const response = await fetch(
+				"https://opentdb.com/api.php?amount=10"
+			);
+			const data = await response.json().catch((err) => console.log(err));
+
+			const quiz = await data.results;
+			setQuiz(quiz);
+			setLoading(false);
+		},
+		[refreshQuiz]
+	);
+
+	// Function to incremenet the score
 	const increaseScore = () => {
 		setScore((formerScore) => formerScore + 1);
 	};
 
+	// Function that handles all clicks on the button down the page
 	const handleButtonClick = () => {
 		if (endQuiz) {
 			setScore(0);
 			setEndQuiz(false);
-			setQuiz(data);
+			setLoading(true);
+			setRefreshQuiz(true);
 			return;
 		}
 		setEndQuiz(true);
@@ -63,15 +96,6 @@ export default function Quiz() {
 		handleSelection(question, answer);
 	};
 
-	// Initialize quiz state
-	const [quiz, setQuiz] = useState(data);
-
-	// Initialialize end quiz state
-	const [endQuiz, setEndQuiz] = useState(false);
-
-	// Initialize score state
-	const [score, setScore] = useState(0);
-
 	// Map over the data and return Question Components
 	const questionItems = quiz.map((quizItem) => {
 		return (
@@ -91,20 +115,30 @@ export default function Quiz() {
 
 	return (
 		<div className="quiz grid">
-			<Link to="/">back</Link>
-			<h3>Quiz</h3>
-			{questionItems}
-			<div className="grid answer__region">
-				{/* Render quiz results */}
-				{endQuiz && (
-					<h1>
-						Your score is {score}/{quiz.length}
-					</h1>
-				)}
-				<button onClick={handleButtonClick}>
-					{endQuiz ? "Play again" : "Check answers"}
-				</button>
-			</div>
+			{/* Render the loader if in loading state else render the components */}
+			{loading ? (
+				<Loader />
+			) : (
+				<>
+					<h3>Quiz</h3>
+					{questionItems}
+					<div className="grid answer__region">
+						{/* Render quiz results */}
+						{endQuiz && (
+							<h1>
+								Your score is {score}/{quiz.length}
+							</h1>
+						)}
+						<button onClick={handleButtonClick}>
+							{endQuiz ? "Play again" : "Check answers"}
+						</button>
+
+							<Link className="back__btn" to="/">
+								back
+							</Link>
+					</div>
+				</>
+			)}
 		</div>
 	);
 }
