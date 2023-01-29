@@ -32,9 +32,13 @@ export default function Quiz() {
 			const response = await fetch(
 				"https://opentdb.com/api.php?amount=10"
 			);
-			const data = await response.json().catch((err) => console.log(err));
+			const data = await response.json().catch((err) => {
+				console.log(err);
+
+			});
 
 			const quiz = await data.results;
+			console.log(quiz)
 			setQuiz(quiz);
 			setLoading(false);
 		},
@@ -133,9 +137,9 @@ export default function Quiz() {
 							{endQuiz ? "Play again" : "Check answers"}
 						</button>
 
-							<Link className="back__btn" to="/">
-								back
-							</Link>
+						<Link className="back__btn" to="/">
+							back
+						</Link>
 					</div>
 				</>
 			)}
