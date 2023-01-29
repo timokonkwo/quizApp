@@ -25,27 +25,27 @@ export default function Quiz() {
 	// Initialize loading
 	const [loading, setLoading] = useState(true); //default to true
 
-	const [refreshQuiz, setRefreshQuiz] = useState(true);
+	const [refreshQuiz, setRefreshQuiz] = useState(false);
 
 	const fetchQuiz = async () => {
 		try {
-			const response = await fetch("https://opentdb.com/api.php?amount=10");
-		console.log(response);
-		const data = await response.json()
+			const response = await fetch(
+				"https://opentdb.com/api.php?amount=10"
+			);
+			const data = await response.json();
 
-		// set the quiz object in the returned array
-		const quiz = await data.results;
+			// set the quiz object in the returned array
+			const quiz = await data.results;
 
-		// Update the quiz state with the fetched data
-		setQuiz(quiz);
+			// Update the quiz state with the fetched data
+			setQuiz(quiz);
 
-		// Remove the loader on the screen
-		setLoading(false);
-
-		} catch(error){
-			console.log(error)
+			// Remove the loader on the screen
+			setLoading(false);
+		} catch (error) {
+			console.log(error);
+			setRefreshQuiz(!refreshQuiz);
 		}
-		
 	};
 
 	useEffect(() => {
@@ -63,7 +63,7 @@ export default function Quiz() {
 			setScore(0);
 			setEndQuiz(false);
 			setLoading(true);
-			setRefreshQuiz(true);
+			setRefreshQuiz(!refreshQuiz);
 			return;
 		}
 		setEndQuiz(true);
