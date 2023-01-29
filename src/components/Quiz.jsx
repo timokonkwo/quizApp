@@ -23,12 +23,9 @@ export default function Quiz() {
 	const [score, setScore] = useState(0);
 
 	// Initialize loading
-	const [loading, setLoading] = useState(true); //default to true
+	const [loading, setLoading] = useState(false); //default to true
 
 	const [refreshQuiz, setRefreshQuiz] = useState(false);
-
-	console.log("Quiz")
-
 
 	useEffect(
 		() => async () => {
