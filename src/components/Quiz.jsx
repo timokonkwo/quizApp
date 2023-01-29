@@ -29,9 +29,11 @@ export default function Quiz() {
 
 	useEffect(
 		() => async () => {
+			console.log("Searching")
 			const response = await fetch(
 				"https://opentdb.com/api.php?amount=10"
 			);
+			console.log(response)
 			const data = await response.json().catch((err) => {
 				console.log(err);
 
