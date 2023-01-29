@@ -23,29 +23,34 @@ export default function Quiz() {
 	const [score, setScore] = useState(0);
 
 	// Initialize loading
-	const [loading, setLoading] = useState(false); //default to true
+	const [loading, setLoading] = useState(true); //default to true
 
-	const [refreshQuiz, setRefreshQuiz] = useState(false);
+	const [refreshQuiz, setRefreshQuiz] = useState(true);
 
-	useEffect(
-		() => async () => {
-			console.log("Searching")
-			const response = await fetch(
-				"https://opentdb.com/api.php?amount=10"
-			);
-			console.log(response)
-			const data = await response.json().catch((err) => {
-				console.log(err);
+	const fetchQuiz = async () => {
+		try {
+			const response = await fetch("https://opentdb.com/api.php?amount=10");
+		console.log(response);
+		const data = await response.json()
 
-			});
+		// set the quiz object in the returned array
+		const quiz = await data.results;
 
-			const quiz = await data.results;
-			console.log(quiz)
-			setQuiz(quiz);
-			setLoading(false);
-		},
-		[refreshQuiz]
-	);
+		// Update the quiz state with the fetched data
+		setQuiz(quiz);
+
+		// Remove the loader on the screen
+		setLoading(false);
+
+		} catch(error){
+			console.log(error)
+		}
+		
+	};
+
+	useEffect(() => {
+		fetchQuiz();
+	}, [refreshQuiz]);
 
 	// Function to incremenet the score
 	const increaseScore = () => {
