@@ -29,5 +29,6 @@ export default function Option(props) {
         cssClass = "option selected"
     }
 
-	return <div className={cssClass}>{props.answer}</div>;
+    // Make react recognize the special characters returned.
+	return <div className={cssClass} dangerouslySetInnerHTML={{__html: props.answer}} />;
 }
