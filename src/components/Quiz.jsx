@@ -27,6 +27,9 @@ export default function Quiz() {
 
 	const [refreshQuiz, setRefreshQuiz] = useState(false);
 
+	console.log("Quiz")
+
+
 	useEffect(
 		() => async () => {
 			console.log("Searching")
