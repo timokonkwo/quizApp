@@ -7,14 +7,14 @@ import Loader from "../../utils/Loader";
 
 export default function Quiz() {
 	/**
-	 * Implement back button
-	 * Render the quiz data to the page
-	 * Implement score state
-	 * Implement play again button
+	 * Implement a single question per page
+	 * Add next and previous button
+	 * Check answers will only appear at the end of the questions
+	 * Update UI
 	 */
 
 	// Initialize quiz state
-	const [quizItem, setQuiz] = useState(localData[0]);
+	const [quiz, setQuiz] = useState(localData);
 
 	// Initialialize end quiz state
 	const [endQuiz, setEndQuiz] = useState(false);
@@ -23,7 +23,7 @@ export default function Quiz() {
 	const [score, setScore] = useState(0);
 
 	// Initialize loading
-	const [loading, setLoading] = useState(false); //default to true
+	const [loading, setLoading] = useState(true); //default to true
 
 	const [refreshQuiz, setRefreshQuiz] = useState(false);
 
@@ -38,7 +38,7 @@ export default function Quiz() {
 			const quiz = await data.results;
 
 			// Update the quiz state with the fetched data
-			// setQuiz(quiz);
+			setQuiz(quiz);
 
 			// Remove the loader on the screen
 			setLoading(false);
@@ -108,6 +108,21 @@ export default function Quiz() {
 	};
 
 	// Map over the data and return Question Components
+	const questionItems = quiz.map((quizItem) => {
+		return (
+			<Question
+				id={quizItem.question}
+				key={quizItem.question}
+				question={quizItem.question}
+				correctAnswer={quizItem.correct_answer}
+				wrongAnswers={quizItem.incorrect_answers}
+				handleOptionClick={handleOptionClick}
+				selected={quizItem.selected}
+				marked={quizItem.marked}
+				endQuiz={endQuiz}
+			/>
+		);
+	});
 
 	return (
 		<div className="quiz grid">
@@ -117,22 +132,12 @@ export default function Quiz() {
 			) : (
 				<>
 					<h3>Quiz</h3>
-					<Question
-						id={quizItem.question}
-						key={quizItem.question}
-						question={quizItem.question}
-						correctAnswer={quizItem.correct_answer}
-						wrongAnswers={quizItem.incorrect_answers}
-						handleOptionClick={handleOptionClick}
-						selected={quizItem.selected}
-						marked={quizItem.marked}
-						endQuiz={endQuiz}
-					/>
+					{questionItems}
 					<div className="grid answer__region">
 						{/* Render quiz results */}
 						{endQuiz && (
 							<h1>
-								Your score is {score}/{10}
+								Your score is {score}/{quiz.length}
 							</h1>
 						)}
 						<button onClick={handleButtonClick}>
