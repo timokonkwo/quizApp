@@ -34,7 +34,7 @@ export default function Question(props) {
 	return (
 		<div data-question={props.question} className="question grid">
 			<div>
-				<h3>{props.question}</h3>
+				<h3 dangerouslySetInnerHTML={{__html: props.question}} />
 
 				<div onClick={props.handleOptionClick} className="options">
 					{answersRender}
