@@ -170,6 +170,17 @@ main {
   justify-self: center;
 }
 
+.quiz__navigation {
+	grid-template-columns: max-content max-content;
+	column-gap: 2rem;
+}
+
+.previous__question {
+	background-color: transparent;
+	border: 1px solid var(--first-color);
+	color: var(--first-color);
+}
+
 @media screen and (max-width: 767px) {
 	.options {
 		display: grid;
