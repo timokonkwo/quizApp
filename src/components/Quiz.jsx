@@ -6,12 +6,6 @@ import Question from "./Question";
 import Loader from "../../utils/Loader";
 
 export default function Quiz() {
-	/**
-	 * Implement back button
-	 * Render the quiz data to the page
-	 * Implement score state
-	 * Implement play again button
-	 */
 
 	// Initialize quiz state
 	const [quiz, setQuiz] = useState(localData);
