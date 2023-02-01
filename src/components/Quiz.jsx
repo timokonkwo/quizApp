@@ -14,7 +14,10 @@ export default function Quiz() {
 	 */
 
 	// Initialize quiz state
-	const [quizItem, setQuiz] = useState(localData[0]);
+	const [quiz, setQuiz] = useState(localData);
+
+	// Initialize index to use in viewing single questions
+	const [index, setIndex] = useState(0);
 
 	// Initialialize end quiz state
 	const [endQuiz, setEndQuiz] = useState(false);
@@ -107,12 +110,16 @@ export default function Quiz() {
 		handleSelection(question, answer);
 	};
 
-	// Map over the data and return Question Components
-	// const questionItems = quiz.map((quizItem) => {
-	// 	return (
+	const prevQuestion = () => {
+		setIndex(prev => prev - 1)
+	}
 
-	// 	);
-	// });
+	const nextQuestion = () => {
+		setIndex(prev => prev + 1)
+	}
+
+
+	const currentQuestion = quiz[index];
 
 	return (
 		<div className="quiz grid">
@@ -123,14 +130,14 @@ export default function Quiz() {
 				<>
 					<h3>Quiz</h3>
 					<Question
-						id={quizItem.question}
-						key={quizItem.question}
-						question={quizItem.question}
-						correctAnswer={quizItem.correct_answer}
-						wrongAnswers={quizItem.incorrect_answers}
+						id={currentQuestion.question}
+						key={currentQuestion.question}
+						question={currentQuestion.question}
+						correctAnswer={currentQuestion.correct_answer}
+						wrongAnswers={currentQuestion.incorrect_answers}
 						handleOptionClick={handleOptionClick}
-						selected={quizItem.selected}
-						marked={quizItem.marked}
+						selected={currentQuestion.selected}
+						marked={currentQuestion.marked}
 						endQuiz={endQuiz}
 					/>
 					<div className="grid answer__region">
@@ -142,10 +149,15 @@ export default function Quiz() {
 						)}
 
 						<div className="quiz__navigation grid">
-							<button className="previous__question">
+							<button className="previous__question"
+							disabled={index === 0}
+							onClick={prevQuestion}
+							>
 								Previous
 							</button>
-							<button className="next__question">Next</button>
+							<button className="next__question"
+							onClick={nextQuestion}
+							>Next</button>
 						</div>
 
 						<button onClick={handleButtonClick}>
