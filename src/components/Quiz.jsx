@@ -26,7 +26,7 @@ export default function Quiz() {
 	const [score, setScore] = useState(0);
 
 	// Initialize loading
-	const [loading, setLoading] = useState(false); //default to true
+	const [loading, setLoading] = useState(true); //default to true
 
 	const [refreshQuiz, setRefreshQuiz] = useState(false);
 
@@ -41,10 +41,11 @@ export default function Quiz() {
 			const quiz = await data.results;
 
 			// Update the quiz state with the fetched data
-			// setQuiz(quiz);
+			setQuiz(quiz);
 
 			// Remove the loader on the screen
 			setLoading(false);
+
 		} catch (error) {
 			console.log(error);
 			setRefreshQuiz(!refreshQuiz);
@@ -64,6 +65,7 @@ export default function Quiz() {
 	const handleButtonClick = () => {
 		if (endQuiz) {
 			setScore(0);
+			setIndex(0)
 			setEndQuiz(false);
 			setLoading(true);
 			setRefreshQuiz(!refreshQuiz);
@@ -111,13 +113,12 @@ export default function Quiz() {
 	};
 
 	const prevQuestion = () => {
-		setIndex(prev => prev - 1)
-	}
+		setIndex((prev) => prev - 1);
+	};
 
 	const nextQuestion = () => {
-		setIndex(prev => prev + 1)
-	}
-
+		setIndex((prev) => prev + 1);
+	};
 
 	const currentQuestion = quiz[index];
 
@@ -144,25 +145,31 @@ export default function Quiz() {
 						{/* Render quiz results */}
 						{endQuiz && (
 							<h1>
-								Your score is {score}/{10}
+								Your score is {score}/{quiz.length}
 							</h1>
 						)}
 
 						<div className="quiz__navigation grid">
-							<button className="previous__question"
-							disabled={index === 0}
-							onClick={prevQuestion}
+							<button
+								className="previous__question"
+								disabled={index === 0}
+								onClick={prevQuestion}
 							>
 								Previous
 							</button>
-							<button className="next__question"
-							onClick={nextQuestion}
-							>Next</button>
+							<button
+								className="next__question"
+								onClick={nextQuestion}
+							>
+								Next
+							</button>
 						</div>
 
-						<button onClick={handleButtonClick}>
-							{endQuiz ? "Play again" : "Check answers"}
-						</button>
+						{index === quiz.length - 1 && (
+							<button onClick={handleButtonClick}>
+								{endQuiz ? "Play again" : "Check answers"}
+							</button>
+						)}
 
 						{/* <Link className="back__btn" to="/">
 							back
