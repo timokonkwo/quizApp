@@ -19,6 +19,7 @@ body {
 		url("./assets/blob-2.png") fixed no-repeat top right;
 	background-color: #f5f7fb;
 	font-family: "Karla", sans-serif;
+	height: 100vh;
 }
 
 .grid {
@@ -86,7 +87,7 @@ main {
 .quiz {
 	grid-template-columns: repeat(2, fit-content);
 	gap: 1.5rem 5rem;
-	margin: 3rem auto;
+	margin: 4rem auto 0;
 }
 
 .error {

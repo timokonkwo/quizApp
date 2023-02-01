@@ -160,6 +160,7 @@ export default function Quiz() {
 							<button
 								className="next__question"
 								onClick={nextQuestion}
+								disabled={index === quiz.length - 1}
 							>
 								Next
 							</button>
