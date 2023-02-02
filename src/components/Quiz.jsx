@@ -1,16 +1,20 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { localData } from "../data";
 import Question from "./Question";
 import Loader from "../../utils/Loader";
+import { CgProfile } from "react-icons/cg";
 
 export default function Quiz() {
 
-	// Initialize quiz state
+  // Initialize quiz state
 	const [quiz, setQuiz] = useState(localData);
 
-	// Initialialize end quiz state
+	// Initialize index to use in viewing single questions
+	const [index, setIndex] = useState(0);
+
+	// Initialialize end quiz stateeeeeeeee
 	const [endQuiz, setEndQuiz] = useState(false);
 
 	// Initialize score state
@@ -36,6 +40,7 @@ export default function Quiz() {
 
 			// Remove the loader on the screen
 			setLoading(false);
+			
 		} catch (error) {
 			console.log(error);
 			setRefreshQuiz(!refreshQuiz);
@@ -55,6 +60,7 @@ export default function Quiz() {
 	const handleButtonClick = () => {
 		if (endQuiz) {
 			setScore(0);
+			setIndex(0);
 			setEndQuiz(false);
 			setLoading(true);
 			setRefreshQuiz(!refreshQuiz);
@@ -101,22 +107,15 @@ export default function Quiz() {
 		handleSelection(question, answer);
 	};
 
-	// Map over the data and return Question Components
-	const questionItems = quiz.map((quizItem) => {
-		return (
-			<Question
-				id={quizItem.question}
-				key={quizItem.question}
-				question={quizItem.question}
-				correctAnswer={quizItem.correct_answer}
-				wrongAnswers={quizItem.incorrect_answers}
-				handleOptionClick={handleOptionClick}
-				selected={quizItem.selected}
-				marked={quizItem.marked}
-				endQuiz={endQuiz}
-			/>
-		);
-	});
+	const prevQuestion = () => {
+		setIndex((prev) => prev - 1);
+	};
+
+	const nextQuestion = () => {
+		setIndex((prev) => prev + 1);
+	};
+
+	const currentQuestion = quiz[index];
 
 	return (
 		<div className="quiz grid">
@@ -125,8 +124,22 @@ export default function Quiz() {
 				<Loader />
 			) : (
 				<>
-					<h3>Quiz</h3>
-					{questionItems}
+					<nav>
+						<h3>Quiz</h3>
+						<CgProfile className="profile__icon" />
+					</nav>
+
+					<Question
+						id={currentQuestion.question}
+						key={currentQuestion.question}
+						question={currentQuestion.question}
+						correctAnswer={currentQuestion.correct_answer}
+						wrongAnswers={currentQuestion.incorrect_answers}
+						handleOptionClick={handleOptionClick}
+						selected={currentQuestion.selected}
+						marked={currentQuestion.marked}
+						endQuiz={endQuiz}
+					/>
 					<div className="grid answer__region">
 						{/* Render quiz results */}
 						{endQuiz && (
@@ -134,13 +147,39 @@ export default function Quiz() {
 								Your score is {score}/{quiz.length}
 							</h1>
 						)}
-						<button onClick={handleButtonClick}>
-							{endQuiz ? "Play again" : "Check answers"}
-						</button>
 
-						<Link className="back__btn" to="/">
+						<div className="quiz__navigation grid">
+							<button
+								className={index === 0 ? "last__question" : "previous__question"}
+								disabled={index === 0}
+								onClick={prevQuestion}
+							>
+								Previous
+							</button>
+							<button
+								className={index === quiz.length - 1 ? "next__question last__question" : ""}
+								onClick={nextQuestion}
+								disabled={index === quiz.length - 1}
+							>
+								Next
+							</button>
+						</div>
+
+						{index === quiz.length - 1 && !endQuiz && (
+							<button onClick={handleButtonClick}>
+								Check answers
+							</button>
+						)}
+
+						{endQuiz && (
+							<button onClick={handleButtonClick}>
+							Play again
+						</button>
+						)}
+
+						{/* <Link className="back__btn" to="/">
 							back
-						</Link>
+						</Link> */}
 					</div>
 				</>
 			)}

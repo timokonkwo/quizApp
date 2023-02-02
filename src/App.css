@@ -19,6 +19,7 @@ body {
 		url("./assets/blob-2.png") fixed no-repeat top right;
 	background-color: #f5f7fb;
 	font-family: "Karla", sans-serif;
+	height: 100vh;
 }
 
 .grid {
@@ -35,7 +36,7 @@ button {
 	border-radius: 0.75rem;
 }
 
-button:hover {
+button:active {
 	background-color: var(--first-color-dark);
 }
 
@@ -65,16 +66,16 @@ main {
 
 .loader {
 	height: 100vh;
-  width: 100%;
+	width: 100%;
 	background-image: url("../src/assets/loader.gif");
 	background-repeat: no-repeat;
 	background-size: 200px;
 	background-position: center;
 	background-attachment: fixed;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 .start__quiz {
@@ -83,10 +84,24 @@ main {
 	margin-top: 1rem;
 }
 
+/* Navbar change later */
+nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.profile__icon {
+	font-size: large;
+
+}
+
+/* End */
+
 .quiz {
 	grid-template-columns: repeat(2, fit-content);
 	gap: 1.5rem 5rem;
-	margin: 3rem auto;
+	margin: 4rem auto 0;
 }
 
 .error {
@@ -134,7 +149,7 @@ main {
 
 .marked {
 	font-weight: normal;
-	border-color: #D6DBF5;
+	border-color: #d6dbf5;
 }
 
 .correct {
@@ -152,7 +167,7 @@ main {
 .answer__region {
 	grid-template-columns: max-content max-content max-content;
 	place-content: center;
-  align-items: center;
+	align-items: center;
 	gap: 2.5rem;
 }
 
@@ -161,13 +176,32 @@ main {
 } */
 
 .back__btn {
-  display: inline-flex;
-  text-decoration: none;
-  border: 1px solid var(--first-color);
-  border-radius: .75rem;
-  padding: .4rem 1rem;
-  text-align: center;
-  justify-self: center;
+	display: inline-flex;
+	text-decoration: none;
+	border: 1px solid var(--first-color);
+	border-radius: 0.75rem;
+	padding: 0.4rem 1rem;
+	text-align: center;
+	justify-self: center;
+}
+
+.quiz__navigation {
+	grid-template-columns: max-content max-content;
+	column-gap: 2rem;
+}
+
+.previous__question {
+	background-color: transparent;
+	border: 1px solid var(--first-color);
+	color: var(--first-color);
+}
+
+.last__question {
+	background-color: lightgrey;
+}
+
+.last__question:active {
+	background-color: lightgrey;
 }
 
 @media screen and (max-width: 767px) {
@@ -194,7 +228,6 @@ main {
 		place-content: center;
 	}
 }
-
 
 @media screen and (min-width: 991px) {
 	.quiz {
