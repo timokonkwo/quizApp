@@ -27,7 +27,7 @@ export default function Quiz() {
 	const [score, setScore] = useState(0);
 
 	// Initialize loading
-	const [loading, setLoading] = useState(false); //default to true
+	const [loading, setLoading] = useState(true); //default to true
 
 	const [refreshQuiz, setRefreshQuiz] = useState(false);
 
@@ -42,10 +42,11 @@ export default function Quiz() {
 			const quiz = await data.results;
 
 			// Update the quiz state with the fetched data
-			// setQuiz(quiz);
+			setQuiz(quiz);
 
 			// Remove the loader on the screen
 			setLoading(false);
+			
 		} catch (error) {
 			console.log(error);
 			setRefreshQuiz(!refreshQuiz);
@@ -67,7 +68,7 @@ export default function Quiz() {
 			setScore(0);
 			setIndex(0);
 			setEndQuiz(false);
-			// setLoading(true);
+			setLoading(true);
 			setRefreshQuiz(!refreshQuiz);
 			return;
 		}
