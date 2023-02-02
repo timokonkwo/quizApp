@@ -7,14 +7,8 @@ import Loader from "../../utils/Loader";
 import { CgProfile } from "react-icons/cg";
 
 export default function Quiz() {
-	/**
-	 * Implement a single question per page
-	 * Add next and previous button
-	 * Check answers will only appear at the end of the questions
-	 * Update UI
-	 */
 
-	// Initialize quiz state
+  // Initialize quiz state
 	const [quiz, setQuiz] = useState(localData);
 
 	// Initialize index to use in viewing single questions
