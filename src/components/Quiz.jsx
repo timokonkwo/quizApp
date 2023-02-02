@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { localData } from "../data";
 import Question from "./Question";
 import Loader from "../../utils/Loader";
+import { CgProfile } from "react-icons/cg";
 
 export default function Quiz() {
 	/**
@@ -19,14 +20,14 @@ export default function Quiz() {
 	// Initialize index to use in viewing single questions
 	const [index, setIndex] = useState(0);
 
-	// Initialialize end quiz state
+	// Initialialize end quiz stateeeeeeeee
 	const [endQuiz, setEndQuiz] = useState(false);
 
 	// Initialize score state
 	const [score, setScore] = useState(0);
 
 	// Initialize loading
-	const [loading, setLoading] = useState(true); //default to true
+	const [loading, setLoading] = useState(false); //default to true
 
 	const [refreshQuiz, setRefreshQuiz] = useState(false);
 
@@ -41,11 +42,10 @@ export default function Quiz() {
 			const quiz = await data.results;
 
 			// Update the quiz state with the fetched data
-			setQuiz(quiz);
+			// setQuiz(quiz);
 
 			// Remove the loader on the screen
 			setLoading(false);
-
 		} catch (error) {
 			console.log(error);
 			setRefreshQuiz(!refreshQuiz);
@@ -65,9 +65,9 @@ export default function Quiz() {
 	const handleButtonClick = () => {
 		if (endQuiz) {
 			setScore(0);
-			setIndex(0)
+			setIndex(0);
 			setEndQuiz(false);
-			setLoading(true);
+			// setLoading(true);
 			setRefreshQuiz(!refreshQuiz);
 			return;
 		}
@@ -129,7 +129,11 @@ export default function Quiz() {
 				<Loader />
 			) : (
 				<>
-					<h3>Quiz</h3>
+					<nav>
+						<h3>Quiz</h3>
+						<CgProfile className="profile__icon" />
+					</nav>
+
 					<Question
 						id={currentQuestion.question}
 						key={currentQuestion.question}
@@ -151,14 +155,14 @@ export default function Quiz() {
 
 						<div className="quiz__navigation grid">
 							<button
-								className="previous__question"
+								className={index === 0 ? "last__question" : "previous__question"}
 								disabled={index === 0}
 								onClick={prevQuestion}
 							>
 								Previous
 							</button>
 							<button
-								className="next__question"
+								className={index === quiz.length - 1 ? "next__question last__question" : ""}
 								onClick={nextQuestion}
 								disabled={index === quiz.length - 1}
 							>
@@ -166,10 +170,16 @@ export default function Quiz() {
 							</button>
 						</div>
 
-						{index === quiz.length - 1 && (
+						{index === quiz.length - 1 && !endQuiz && (
 							<button onClick={handleButtonClick}>
-								{endQuiz ? "Play again" : "Check answers"}
+								Check answers
 							</button>
+						)}
+
+						{endQuiz && (
+							<button onClick={handleButtonClick}>
+							Play again
+						</button>
 						)}
 
 						{/* <Link className="back__btn" to="/">

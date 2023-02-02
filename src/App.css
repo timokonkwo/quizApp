@@ -84,6 +84,20 @@ main {
 	margin-top: 1rem;
 }
 
+/* Navbar change later */
+nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.profile__icon {
+	font-size: large;
+
+}
+
+/* End */
+
 .quiz {
 	grid-template-columns: repeat(2, fit-content);
 	gap: 1.5rem 5rem;
@@ -180,6 +194,14 @@ main {
 	background-color: transparent;
 	border: 1px solid var(--first-color);
 	color: var(--first-color);
+}
+
+.last__question {
+	background-color: lightgrey;
+}
+
+.last__question:active {
+	background-color: lightgrey;
 }
 
 @media screen and (max-width: 767px) {
